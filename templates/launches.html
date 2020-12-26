@@ -1,17 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1 class="text-center mb-4">Past Launches</h1>
+<h1 class="text-center mb-4">Launches</h1>
+<h2 class="mb-3">Past Launches</h2>
 {% for launch in past_launches %}
 <div class="card bg-light mb-3">
   <div class="card-body">
     <h5 class="card-title">{{ launch.name }}</h5>
-    <p class="card-text">Flight Number: {{ launch.flight_number }}</p>
+    <p class="card-text mb-0">Flight Number: {{ launch.flight_number }}</p>
+    <p class="card-text">
+      Launch Status: 
+      {% if launch.success %}
+      <span class="badge bg-success">Success</span>
+      {% else %}
+      <span class="badge bg-danger">Failure</span>
+      {% endif %}
+    </p>
     {% if launch.details %}
     <p class="card-text">{{ launch.details }}</p>
     {% endif %}
     <div class="btn-group">
       {% if launch.links.webcast %}
       <a href="{{ launch.links.webcast }}" class="btn btn-sm btn-outline-dark">YouTube</a>
+      {% endif %}
+      {% if launch.links.article %}
+      <a href="{{ launch.links.article }}" class="btn btn-sm btn-outline-dark">Article</a>
       {% endif %}
       {% if launch.links.wikipedia %}
       <a href="{{ launch.links.wikipedia }}" class="btn btn-sm btn-outline-dark">Wikipedia</a>
