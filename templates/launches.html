@@ -6,14 +6,22 @@
 <div class="card bg-light mb-3">
   <div class="card-body">
     <h5 class="card-title">{{ launch.name }}</h5>
-    <p class="card-text mb-0">Flight Number: {{ launch.flight_number }}</p>
-    <p class="card-text">
-      Launch Status: 
+    <p class="card-text mb-0">
+      <span class="text-muted">Status: </span>
       {% if launch.success %}
       <span class="badge bg-success">Success</span>
       {% else %}
       <span class="badge bg-danger">Failure</span>
       {% endif %}
+    </p>
+    <p class="card-text mb-0">
+      <span class="text-muted">Flight Number:</span> {{ launch.flight_number }}
+    </p>
+    <p class="card-text mb-0">
+      <span class="text-muted">Rocket:</span> {{ rockets[launch.rocket] }}
+    </p>
+    <p class="card-text">
+      <span class="text-muted">Launchpad:</span> {{ launchpads[launch.launchpad] }}
     </p>
     {% if launch.details %}
     <p class="card-text">{{ launch.details }}</p>
