@@ -25,13 +25,13 @@ launchpads = {
 def home():
     return render_template('index.html', home_active=active)
 
-@app.route('/launches')
+@app.route('/past')
 def launches():
     r = get('https://api.spacexdata.com/v4/launches/past')
     past_launches = loads(r.text)[::-1]
     return render_template(
-        'launches.html',
-        launches_active=active,
+        'past.html',
+        past_active=active,
         past_launches=past_launches,
         rockets=rockets,
         launchpads=launchpads
