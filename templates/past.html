@@ -17,6 +17,9 @@
       <span class="text-muted">Flight Number:</span> {{ launch.flight_number }}
     </p>
     <p class="card-text mb-0">
+      <span class="text-muted">Date:</span> {{ launch.date_utc[:10] }}
+    </p>
+    <p class="card-text mb-0">
       <span class="text-muted">Rocket:</span> {{ rockets[launch.rocket] }}
     </p>
     <p class="card-text">
