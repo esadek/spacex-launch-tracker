@@ -23,7 +23,18 @@ launchpads = {
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('index.html', home_active=active)
+    next_r = get('https://api.spacexdata.com/v4/launches/next')
+    next_launch = loads(next_r.text)
+    latest_r = get('https://api.spacexdata.com/v4/launches/latest')
+    latest_launch = loads(latest_r.text)
+    return render_template(
+        'index.html',
+        home_active=active,
+        next_launch=next_launch,
+        latest_launch=latest_launch,
+        rockets=rockets,
+        launchpads=launchpads
+    )
 
 @app.route('/upcoming')
 def upcoming():
