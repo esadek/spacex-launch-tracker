@@ -2,20 +2,25 @@
 {% block content %}
 <div class="card bg-light">
   <div class="card-header text-center">Next Launch</div>
-  <div class="card-body">
-    <h5 class="card-title">{{ next_launch.name }}</h5>
-    <p class="card-text mb-0">
-      <span class="text-muted">Flight Number:</span> {{ next_launch.flight_number }}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Date:</span> {{ next_launch.date_utc[:10] }}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Rocket:</span> {{ rockets[next_launch.rocket] }}
-    </p>
-    <p class="card-text">
-      <span class="text-muted">Launchpad:</span> {{ launchpads[next_launch.launchpad] }}
-    </p>
+  <div class="row g-0">
+    <div class="col">
+      <div class="card-body">
+        <h5 class="card-title">{{ next_launch.name }}</h5>
+        <p class="card-text mb-0">
+          <span class="text-muted">Flight Number:</span> {{ next_launch.flight_number }}
+        </p>
+        <p class="card-text mb-0">
+          <span class="text-muted">Date:</span> {{ next_launch.date_utc[:10] }}
+        </p>
+        <p class="card-text mb-0">
+          <span class="text-muted">Rocket:</span> {{ rockets[next_launch.rocket] }}
+        </p>
+        <p class="card-text">
+          <span class="text-muted">Launchpad:</span> {{ launchpads[next_launch.launchpad] }}
+        </p>
+      </div>
+    </div>
+    <div class="col"></div>
   </div>
 </div>
 <div class="card bg-light my-4">
