@@ -20,6 +20,7 @@ launchpads = {
     '5e9e4502f509094188566f88': 'KSC LC 39A'
 }
 
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -36,6 +37,7 @@ def home():
         launchpads=launchpads
     )
 
+
 @app.route('/upcoming')
 def upcoming():
     r = get('https://api.spacexdata.com/v4/launches/upcoming')
@@ -47,6 +49,7 @@ def upcoming():
         rockets=rockets,
         launchpads=launchpads
     )
+
 
 @app.route('/past')
 def past():
@@ -60,9 +63,11 @@ def past():
         launchpads=launchpads
     )
 
+
 @app.route('/about')
 def about():
     return render_template('about.html', about_active=active)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
