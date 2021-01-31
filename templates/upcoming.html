@@ -1,26 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1 class="text-center mb-4">Upcoming Launches</h1>
-<table class="table table-light table-bordered mb-4">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Date</th>
-      <th scope="col">Name</th>
-      <th scope="col">Rocket</th>
-      <th scope="col">Launchpad</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for launch in upcoming_launches %}
-    <tr>
-      <td>{{ launch.flight_number }}</td>
-      <td>{{ launch.date_utc[:10] }}</td>
-      <td>{{ launch.name }}</td>
-      <td>{{ rockets[launch.rocket] }}</td>
-      <td>{{ launchpads[launch.launchpad] }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-light table-bordered mb-4">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Name</th>
+        <th scope="col">Rocket</th>
+        <th scope="col">Launchpad</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for launch in upcoming_launches %}
+      <tr>
+        <td>{{ launch.flight_number }}</td>
+        <td>{{ launch.date_utc[:10] }}</td>
+        <td>{{ launch.name }}</td>
+        <td>{{ rockets[launch.rocket] }}</td>
+        <td>{{ launchpads[launch.launchpad] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
