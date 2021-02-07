@@ -13,13 +13,13 @@
       </tr>
     </thead>
     <tbody>
-      {% for launch in upcoming_launches %}
+      {% for launch in data['upcoming launches'] %}
       <tr>
         <td>{{ launch.flight_number }}</td>
         <td>{{ launch.date_utc[:10] }}</td>
         <td>{{ launch.name }}</td>
-        <td>{{ rockets[launch.rocket] }}</td>
-        <td>{{ launchpads[launch.launchpad] }}</td>
+        <td>{{ data['rockets'][launch.rocket] }}</td>
+        <td>{{ data['launchpads'][launch.launchpad] }}</td>
       </tr>
       {% endfor %}
     </tbody>

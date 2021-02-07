@@ -4,13 +4,13 @@ from json import loads
 
 app = Flask(__name__)
 
-active = 'active'
 rockets = {
     '5e9d0d95eda69955f709d1eb': 'Falcon 1',
     '5e9d0d95eda69973a809d1ec': 'Falcon 9',
     '5e9d0d95eda69974db09d1ed': 'Falcon Heavy',
     '5e9d0d96eda699382d09d1ee': 'Starship'
 }
+
 launchpads = {
     '5e9e4501f5090910d4566f83': 'VAFB SLC 3W',
     '5e9e4501f509094ba4566f84': 'CCSFS SLC 40',
@@ -25,48 +25,41 @@ launchpads = {
 @app.route('/home')
 def home():
     next_r = get('https://api.spacexdata.com/v4/launches/next')
-    next_launch = loads(next_r.text)
     latest_r = get('https://api.spacexdata.com/v4/launches/latest')
-    latest_launch = loads(latest_r.text)
-    return render_template(
-        'index.html',
-        home_active=active,
-        next_launch=next_launch,
-        latest_launch=latest_launch,
-        rockets=rockets,
-        launchpads=launchpads
-    )
+    data = {
+        'next launch': loads(next_r.text),
+        'latest launch': loads(latest_r.text),
+        'rockets': rockets,
+        'launchpads': launchpads
+    }
+    return render_template('index.html', data=data)
 
 
 @app.route('/upcoming')
 def upcoming():
-    r = get('https://api.spacexdata.com/v4/launches/upcoming')
-    upcoming_launches = loads(r.text)
-    return render_template(
-        'upcoming.html',
-        upcoming_active=active,
-        upcoming_launches=upcoming_launches,
-        rockets=rockets,
-        launchpads=launchpads
-    )
+    upcoming_r = get('https://api.spacexdata.com/v4/launches/upcoming')
+    data = {
+        'upcoming launches': loads(upcoming_r.text),
+        'rockets': rockets,
+        'launchpads': launchpads
+    }
+    return render_template('upcoming.html', data=data)
 
 
 @app.route('/past')
 def past():
-    r = get('https://api.spacexdata.com/v4/launches/past')
-    past_launches = loads(r.text)[::-1]
-    return render_template(
-        'past.html',
-        past_active=active,
-        past_launches=past_launches,
-        rockets=rockets,
-        launchpads=launchpads
-    )
+    past_r = get('https://api.spacexdata.com/v4/launches/past')
+    data = {
+        'past launches': loads(past_r.text)[::-1],
+        'rockets': rockets,
+        'launchpads': launchpads
+    }
+    return render_template('past.html', data=data)
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html', about_active=active)
+    return render_template('about.html')
 
 
 if __name__ == '__main__':

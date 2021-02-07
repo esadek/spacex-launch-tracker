@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1 class="text-center mb-4">Past Launches</h1>
-{% for launch in past_launches %}
+{% for launch in data['past launches'] %}
 <div class="card bg-light mb-3">
   <div class="card-body">
     <h5 class="card-title">{{ launch.name }}</h5>
@@ -20,10 +20,10 @@
       <span class="text-muted">Date:</span> {{ launch.date_utc[:10] }}
     </p>
     <p class="card-text mb-0">
-      <span class="text-muted">Rocket:</span> {{ rockets[launch.rocket] }}
+      <span class="text-muted">Rocket:</span> {{ data['rockets'][launch.rocket] }}
     </p>
     <p class="card-text">
-      <span class="text-muted">Launchpad:</span> {{ launchpads[launch.launchpad] }}
+      <span class="text-muted">Launchpad:</span> {{ data['launchpads'][launch.launchpad] }}
     </p>
     {% if launch.details %}
     <p class="card-text">{{ launch.details }}</p>
