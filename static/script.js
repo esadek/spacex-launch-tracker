@@ -1,4 +1,4 @@
-const countdownElement = document.getElementById("countdown")
+const countdownElement = document.getElementById('countdown')
 const launchDateUnix = countdownElement.dataset.date
 const launchDate = new Date(launchDateUnix * 1000)
 
@@ -9,5 +9,5 @@ var countdown = setInterval(function() {
     var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
     var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
     var seconds = Math.floor((difference % (1000 * 60)) / 1000)
-    countdownElement.innerHTML = days + "d : " + hours + "h : " + minutes + "m : " + seconds + "s"
+    countdownElement.innerHTML = days + 'd : ' + hours + 'h : ' + minutes + 'm : ' + seconds + 's'
 }, 1000)
