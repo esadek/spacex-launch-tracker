@@ -24,11 +24,11 @@ launchpads = {
 @app.route('/')
 @app.route('/home')
 def home():
-    next_r = get('https://api.spacexdata.com/v4/launches/next')
-    latest_r = get('https://api.spacexdata.com/v4/launches/latest')
+    next_launch = get('https://api.spacexdata.com/v4/launches/next')
+    latest_launch = get('https://api.spacexdata.com/v4/launches/latest')
     data = {
-        'next launch': loads(next_r.text),
-        'latest launch': loads(latest_r.text),
+        'next launch': loads(next_launch.text),
+        'latest launch': loads(latest_launch.text),
         'rockets': rockets,
         'launchpads': launchpads
     }
@@ -37,9 +37,9 @@ def home():
 
 @app.route('/upcoming')
 def upcoming():
-    upcoming_r = get('https://api.spacexdata.com/v4/launches/upcoming')
+    upcoming_launches = get('https://api.spacexdata.com/v4/launches/upcoming')
     data = {
-        'upcoming launches': loads(upcoming_r.text),
+        'upcoming launches': loads(upcoming_launches.text),
         'rockets': rockets,
         'launchpads': launchpads
     }
@@ -48,9 +48,9 @@ def upcoming():
 
 @app.route('/past')
 def past():
-    past_r = get('https://api.spacexdata.com/v4/launches/past')
+    past_launches = get('https://api.spacexdata.com/v4/launches/past')
     data = {
-        'past launches': loads(past_r.text)[::-1],
+        'past launches': loads(past_launches.text)[::-1],
         'rockets': rockets,
         'launchpads': launchpads
     }
