@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from requests import get
 from json import loads
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 rockets = {
     '5e9d0d95eda69955f709d1eb': 'Falcon 1',
@@ -21,8 +21,8 @@ launchpads = {
 }
 
 
-@app.route('/')
-@app.route('/home')
+@application.route('/')
+@application.route('/home')
 def home():
     next_launch = get('https://api.spacexdata.com/v4/launches/next')
     latest_launch = get('https://api.spacexdata.com/v4/launches/latest')
@@ -35,7 +35,7 @@ def home():
     return render_template('index.html', data=data)
 
 
-@app.route('/upcoming')
+@application.route('/upcoming')
 def upcoming():
     upcoming_launches = get('https://api.spacexdata.com/v4/launches/upcoming')
     data = {
@@ -46,7 +46,7 @@ def upcoming():
     return render_template('upcoming.html', data=data)
 
 
-@app.route('/past')
+@application.route('/past')
 def past():
     past_launches = get('https://api.spacexdata.com/v4/launches/past')
     data = {
@@ -57,10 +57,10 @@ def past():
     return render_template('past.html', data=data)
 
 
-@app.route('/about')
+@application.route('/about')
 def about():
     return render_template('about.html')
 
 
 if __name__ == '__main__':
-    app.run()
+    application.run()
