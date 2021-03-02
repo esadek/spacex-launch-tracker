@@ -20,10 +20,10 @@
       <span class="text-muted">Date:</span> {{ launch.date_utc[:10] }}
     </p>
     <p class="card-text mb-0">
-      <span class="text-muted">Rocket:</span> {{ data['rockets'][launch.rocket] }}
+      <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][launch.rocket] }}
     </p>
     <p class="card-text">
-      <span class="text-muted">Launchpad:</span> {{ data['launchpads'][launch.launchpad] }}
+      <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][launch.launchpad] }}
     </p>
     {% if launch.details %}
     <p class="card-text">{{ launch.details }}</p>
