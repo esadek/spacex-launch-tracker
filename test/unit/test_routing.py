@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from application import application
 
 
-class TestApplication(unittest.TestCase):
+class TestRouting(unittest.TestCase):
 
     def setUp(self):
         self.app = application.test_client()
