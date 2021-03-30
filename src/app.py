@@ -19,11 +19,11 @@ IDS = {
     }
 }
 
-application = Flask(__name__)
+app = Flask(__name__)
 
 
-@application.route('/')
-@application.route('/home')
+@app.route('/')
+@app.route('/home')
 def home():
     next_launch = get('https://api.spacexdata.com/v4/launches/next')
     latest_launch = get('https://api.spacexdata.com/v4/launches/latest')
@@ -35,7 +35,7 @@ def home():
     return render_template('index.html', data=data)
 
 
-@application.route('/upcoming')
+@app.route('/upcoming')
 def upcoming():
     upcoming_launches = get('https://api.spacexdata.com/v4/launches/upcoming')
     data = {
@@ -45,7 +45,7 @@ def upcoming():
     return render_template('upcoming.html', data=data)
 
 
-@application.route('/past')
+@app.route('/past')
 def past():
     past_launches = get('https://api.spacexdata.com/v4/launches/past')
     data = {
@@ -55,10 +55,10 @@ def past():
     return render_template('past.html', data=data)
 
 
-@application.route('/about')
+@app.route('/about')
 def about():
     return render_template('about.html')
 
 
 if __name__ == '__main__':
-    application.run()
+    app.run()

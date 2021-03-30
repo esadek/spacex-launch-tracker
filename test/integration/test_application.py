@@ -2,13 +2,13 @@ import os
 import sys
 import unittest
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
-from application import application
+from app import app
 
 
-class TestApplication(unittest.TestCase):
+class TestApp(unittest.TestCase):
 
     def setUp(self):
-        self.app = application.test_client()
+        self.app = app.test_client()
 
     def test_home_content(self):
         result = self.app.get('/')
