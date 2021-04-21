@@ -25,6 +25,12 @@ Run app:
 $ python src/app.py
 ```
 
+## Testing
+Run all tests with [pytest](https://docs.pytest.org/en/stable/):
+```
+$ pytest
+```
+
 ## License
 
 [MIT](https://github.com/esadek/spacex-launch-tracker/blob/main/LICENSE)
