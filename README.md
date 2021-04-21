@@ -20,6 +20,10 @@ Install required packages:
 ```
 $ pip install -r requirements.txt
 ```
+Run app:
+```
+$ python src/app.py
+```
 
 ## License
 
