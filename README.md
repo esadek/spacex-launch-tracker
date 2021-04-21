@@ -20,3 +20,7 @@ Install required packages:
 ```
 $ pip install -r requirements.txt
 ```
+
+## License
+
+[MIT](https://github.com/esadek/spacex-launch-tracker/blob/main/LICENSE)
