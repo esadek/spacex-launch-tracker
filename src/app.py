@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from requests import get
+from requests_cache import install_cache
 from json import loads
 
 IDS = {
@@ -18,6 +19,8 @@ IDS = {
         '5e9e4502f509094188566f88': 'KSC LC 39A'
     }
 }
+
+install_cache(expire_after=86400)
 
 app = Flask(__name__)
 

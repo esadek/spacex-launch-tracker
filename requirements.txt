@@ -15,6 +15,9 @@ py==1.10.0
 pyparsing==2.4.7
 pytest==6.2.2
 requests==2.25.1
+requests-cache==0.6.3
+six==1.15.0
 toml==0.10.2
+url-normalize==1.4.3
 urllib3==1.26.3
 Werkzeug==1.0.1
