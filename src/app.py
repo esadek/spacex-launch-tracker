@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from requests import get
 from requests_cache import install_cache
-from json import loads
 
 data = {
     'ids': {
@@ -32,22 +31,22 @@ app = Flask(__name__)
 def home():
     next_launch_url = 'https://api.spacexdata.com/v4/launches/next'
     latest_launch_url = 'https://api.spacexdata.com/v4/launches/latest'
-    data['next launch'] = loads(get(next_launch_url).text)
-    data['latest launch'] = loads(get(latest_launch_url).text)
+    data['next launch'] = get(next_launch_url).json()
+    data['latest launch'] = get(latest_launch_url).json()
     return render_template('index.html', data=data)
 
 
 @app.route('/upcoming')
 def upcoming():
     upcoming_launches_url = 'https://api.spacexdata.com/v4/launches/upcoming'
-    data['upcoming launches'] = loads(get(upcoming_launches_url).text)
+    data['upcoming launches'] = get(upcoming_launches_url).json()
     return render_template('upcoming.html', data=data)
 
 
 @app.route('/past')
 def past():
     past_launches_url = 'https://api.spacexdata.com/v4/launches/past'
-    data['past launches'] = loads(get(past_launches_url).text)[::-1]
+    data['past launches'] = get(past_launches_url).json()[::-1]
     return render_template('past.html', data=data)
 
 
