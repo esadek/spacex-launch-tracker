@@ -21,7 +21,7 @@ data = {
     }
 }
 
-install_cache(expire_after=86400)
+install_cache(expire_after=3600)
 
 app = Flask(__name__)
 
