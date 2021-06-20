@@ -2,7 +2,9 @@ from flask import Flask, render_template
 from requests import get
 from requests_cache import install_cache
 
+# Data dictionary
 data = {
+    # Rocket and launchpad ids
     'ids': {
         'rockets': {
             '5e9d0d95eda69955f709d1eb': 'Falcon 1',
@@ -21,14 +23,17 @@ data = {
     }
 }
 
+# Install requests cache
 install_cache(expire_after=3600)
 
+# Instantiate WSGI application
 app = Flask(__name__)
 
 
 @app.route('/')
 @app.route('/home')
 def home():
+    """Home view"""
     next_launch_url = 'https://api.spacexdata.com/v4/launches/next'
     latest_launch_url = 'https://api.spacexdata.com/v4/launches/latest'
     data['next launch'] = get(next_launch_url).json()
@@ -38,6 +43,7 @@ def home():
 
 @app.route('/upcoming')
 def upcoming():
+    """Upcoming launches view"""
     upcoming_launches_url = 'https://api.spacexdata.com/v4/launches/upcoming'
     data['upcoming launches'] = get(upcoming_launches_url).json()
     return render_template('upcoming.html', data=data)
@@ -45,6 +51,7 @@ def upcoming():
 
 @app.route('/past')
 def past():
+    """Past launches view"""
     past_launches_url = 'https://api.spacexdata.com/v4/launches/past'
     data['past launches'] = get(past_launches_url).json()[::-1]
     return render_template('past.html', data=data)
@@ -52,8 +59,10 @@ def past():
 
 @app.route('/about')
 def about():
+    """About view"""
     return render_template('about.html')
 
 
 if __name__ == '__main__':
+    # Run application
     app.run()
