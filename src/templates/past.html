@@ -1,48 +1,52 @@
 {% extends "layout.html" %}
+
 {% block content %}
-<h1 class="text-center text-white mb-4">Past Launches</h1>
-{% for launch in data['past launches'] %}
-<div class="card bg-light mb-3">
-  <div class="card-body">
-    <h5 class="card-title">{{ launch.name }}</h5>
-    <p class="card-text mb-0">
-      <span class="text-muted">Status: </span>
-      {% if launch.success %}
-      <span class="badge bg-success">Success</span>
-      {% else %}
-      <span class="badge bg-danger">Failure</span>
-      {% endif %}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Flight Number:</span> {{ launch.flight_number }}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Date:</span> {{ launch.date_utc[:10] }}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][launch.rocket] }}
-    </p>
-    <p class="card-text">
-      <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][launch.launchpad] }}
-    </p>
-    {% if launch.details %}
-    <p class="card-text">{{ launch.details }}</p>
-    {% endif %}
-    <div class="btn-group">
-      {% if launch.links.webcast %}
-      <a href="{{ launch.links.webcast }}" class="btn btn-sm btn-outline-dark">YouTube</a>
-      {% endif %}
-      {% if launch.links.article %}
-      <a href="{{ launch.links.article }}" class="btn btn-sm btn-outline-dark">Article</a>
-      {% endif %}
-      {% if launch.links.wikipedia %}
-      <a href="{{ launch.links.wikipedia }}" class="btn btn-sm btn-outline-dark">Wikipedia</a>
-      {% endif %}
-      {% if launch.links.presskit %}
-      <a href="{{ launch.links.presskit }}" class="btn btn-sm btn-outline-dark">Press Kit</a>
-      {% endif %}
+  <!-- Header -->
+  <h1 class="text-center text-white mb-4">Past Launches</h1>
+
+  <!-- Cards -->
+  {% for launch in data['past launches'] %}
+    <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ launch.name }}</h5>
+        <p class="card-text mb-0">
+          <span class="text-muted">Status: </span>
+          {% if launch.success %}
+            <span class="badge bg-success">Success</span>
+          {% else %}
+            <span class="badge bg-danger">Failure</span>
+          {% endif %}
+        </p>
+        <p class="card-text mb-0">
+          <span class="text-muted">Flight Number:</span> {{ launch.flight_number }}
+        </p>
+        <p class="card-text mb-0">
+          <span class="text-muted">Date:</span> {{ launch.date_utc[:10] }}
+        </p>
+        <p class="card-text mb-0">
+          <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][launch.rocket] }}
+        </p>
+        <p class="card-text">
+          <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][launch.launchpad] }}
+        </p>
+        {% if launch.details %}
+          <p class="card-text">{{ launch.details }}</p>
+        {% endif %}
+        <div class="btn-group">
+          {% if launch.links.webcast %}
+            <a href="{{ launch.links.webcast }}" class="btn btn-sm btn-outline-dark">YouTube</a>
+          {% endif %}
+          {% if launch.links.article %}
+            <a href="{{ launch.links.article }}" class="btn btn-sm btn-outline-dark">Article</a>
+          {% endif %}
+          {% if launch.links.wikipedia %}
+            <a href="{{ launch.links.wikipedia }}" class="btn btn-sm btn-outline-dark">Wikipedia</a>
+          {% endif %}
+          {% if launch.links.presskit %}
+            <a href="{{ launch.links.presskit }}" class="btn btn-sm btn-outline-dark">Press Kit</a>
+          {% endif %}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-{% endfor %}
+  {% endfor %}
 {% endblock %}

@@ -1,69 +1,73 @@
 {% extends "layout.html" %}
+
 {% block content %}
-<div class="card bg-light text-dark">
-  <div class="card-header text-center">Next Launch</div>
-  <div class="row g-0">
-    <div class="col-sm">
-      <div class="card-body">
-        <h5 class="card-title">{{ data['next launch'].name }}</h5>
-        <p class="card-text mb-0">
-          <span class="text-muted">Flight Number:</span> {{ data['next launch'].flight_number }}
-        </p>
-        <p class="card-text mb-0">
-          <span class="text-muted">Date:</span> {{ data['next launch'].date_utc[:10] }}
-        </p>
-        <p class="card-text mb-0">
-          <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][data['next launch'].rocket] }}
-        </p>
-        <p class="card-text">
-          <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][data['next launch'].launchpad] }}
-        </p>
+  <!-- Next Launch Card -->
+  <div class="card bg-light text-dark">
+    <div class="card-header text-center">Next Launch</div>
+    <div class="row g-0">
+      <div class="col-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ data['next launch'].name }}</h5>
+          <p class="card-text mb-0">
+            <span class="text-muted">Flight Number:</span> {{ data['next launch'].flight_number }}
+          </p>
+          <p class="card-text mb-0">
+            <span class="text-muted">Date:</span> {{ data['next launch'].date_utc[:10] }}
+          </p>
+          <p class="card-text mb-0">
+            <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][data['next launch'].rocket] }}
+          </p>
+          <p class="card-text">
+            <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][data['next launch'].launchpad] }}
+          </p>
+        </div>
+      </div>
+      <div id="countdown" class="col-sm align-self-center h2 p-3" data-date="{{ data['next launch'].date_unix }}"></div>
+    </div>
+  </div>
+
+  <!-- Latest Launch Card -->
+  <div class="card bg-light my-4">
+    <div class="card-header text-center">Latest Launch</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ data['latest launch'].name }}</h5>
+      <p class="card-text mb-0">
+        <span class="text-muted">Status: </span>
+        {% if data['latest launch'].success %}
+          <span class="badge bg-success">Success</span>
+        {% else %}
+          <span class="badge bg-danger">Failure</span>
+        {% endif %}
+      </p>
+      <p class="card-text mb-0">
+        <span class="text-muted">Flight Number:</span> {{ data['latest launch'].flight_number }}
+      </p>
+      <p class="card-text mb-0">
+        <span class="text-muted">Date:</span> {{ data['latest launch'].date_utc[:10] }}
+      </p>
+      <p class="card-text mb-0">
+        <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][data['latest launch'].rocket] }}
+      </p>
+      <p class="card-text">
+        <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][data['latest launch'].launchpad] }}
+      </p>
+      {% if data['latest launch'].details %}
+        <p class="card-text">{{ data['latest launch'].details }}</p>
+      {% endif %}
+      <div class="btn-group">
+        {% if data['latest launch'].links.webcast %}
+          <a href="{{ data['latest launch'].links.webcast }}" class="btn btn-sm btn-outline-dark">YouTube</a>
+        {% endif %}
+        {% if data['latest launch'].links.article %}
+          <a href="{{ data['latest launch'].links.article }}" class="btn btn-sm btn-outline-dark">Article</a>
+        {% endif %}
+        {% if data['latest launch'].links.wikipedia %}
+          <a href="{{ data['latest launch'].links.wikipedia }}" class="btn btn-sm btn-outline-dark">Wikipedia</a>
+        {% endif %}
+        {% if data['latest launch'].links.presskit %}
+          <a href="{{ data['latest launch'].links.presskit }}" class="btn btn-sm btn-outline-dark">Press Kit</a>
+        {% endif %}
       </div>
     </div>
-    <div id="countdown" class="col-sm align-self-center h2 p-3" data-date="{{ data['next launch'].date_unix }}"></div>
   </div>
-</div>
-<div class="card bg-light my-4">
-  <div class="card-header text-center">Latest Launch</div>
-  <div class="card-body">
-    <h5 class="card-title">{{ data['latest launch'].name }}</h5>
-    <p class="card-text mb-0">
-      <span class="text-muted">Status: </span>
-      {% if data['latest launch'].success %}
-      <span class="badge bg-success">Success</span>
-      {% else %}
-      <span class="badge bg-danger">Failure</span>
-      {% endif %}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Flight Number:</span> {{ data['latest launch'].flight_number }}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Date:</span> {{ data['latest launch'].date_utc[:10] }}
-    </p>
-    <p class="card-text mb-0">
-      <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][data['latest launch'].rocket] }}
-    </p>
-    <p class="card-text">
-      <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][data['latest launch'].launchpad] }}
-    </p>
-    {% if data['latest launch'].details %}
-    <p class="card-text">{{ data['latest launch'].details }}</p>
-    {% endif %}
-    <div class="btn-group">
-      {% if data['latest launch'].links.webcast %}
-      <a href="{{ data['latest launch'].links.webcast }}" class="btn btn-sm btn-outline-dark">YouTube</a>
-      {% endif %}
-      {% if data['latest launch'].links.article %}
-      <a href="{{ data['latest launch'].links.article }}" class="btn btn-sm btn-outline-dark">Article</a>
-      {% endif %}
-      {% if data['latest launch'].links.wikipedia %}
-      <a href="{{ data['latest launch'].links.wikipedia }}" class="btn btn-sm btn-outline-dark">Wikipedia</a>
-      {% endif %}
-      {% if data['latest launch'].links.presskit %}
-      <a href="{{ data['latest launch'].links.presskit }}" class="btn btn-sm btn-outline-dark">Press Kit</a>
-      {% endif %}
-    </div>
-  </div>
-</div>
 {% endblock %}
