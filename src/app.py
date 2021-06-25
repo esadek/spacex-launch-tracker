@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask.helpers import stream_with_context
 from requests import get
 from requests_cache import install_cache
 
@@ -32,7 +33,7 @@ app = Flask(__name__)
 
 @app.route('/')
 @app.route('/home')
-def home():
+def home() -> str:
     """Home view"""
     next_launch_url = 'https://api.spacexdata.com/v4/launches/next'
     latest_launch_url = 'https://api.spacexdata.com/v4/launches/latest'
@@ -42,7 +43,7 @@ def home():
 
 
 @app.route('/upcoming')
-def upcoming():
+def upcoming() -> str:
     """Upcoming launches view"""
     upcoming_launches_url = 'https://api.spacexdata.com/v4/launches/upcoming'
     data['upcoming launches'] = get(upcoming_launches_url).json()
@@ -50,7 +51,7 @@ def upcoming():
 
 
 @app.route('/past')
-def past():
+def past() -> str:
     """Past launches view"""
     past_launches_url = 'https://api.spacexdata.com/v4/launches/past'
     data['past launches'] = get(past_launches_url).json()[::-1]
@@ -58,7 +59,7 @@ def past():
 
 
 @app.route('/about')
-def about():
+def about() -> str:
     """About view"""
     return render_template('about.html')
 
