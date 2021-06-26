@@ -31,7 +31,6 @@ app = Flask(__name__)
 
 
 @app.route('/')
-@app.route('/home')
 def home() -> str:
     """Home view"""
     next_launch_url = 'https://api.spacexdata.com/v4/launches/next'
