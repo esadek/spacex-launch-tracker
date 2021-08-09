@@ -24,7 +24,8 @@ data = {
 }
 
 # Install requests cache
-install_cache(expire_after=3600)
+CACHE_DURATION_SECONDS = 3600
+install_cache(expire_after=CACHE_DURATION_SECONDS)
 
 # Instantiate WSGI application
 app = Flask(__name__)
