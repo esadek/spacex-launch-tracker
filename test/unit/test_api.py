@@ -3,7 +3,6 @@ from requests import get
 
 
 class TestApi(unittest.TestCase):
-
     def test_next_status_code(self) -> None:
         response = get('https://api.spacexdata.com/v4/launches/next')
         self.assertEqual(response.status_code, 200)

@@ -6,7 +6,6 @@ from app import app
 
 
 class TestRouting(unittest.TestCase):
-
     def setUp(self) -> None:
         self.app = app.test_client()
 
