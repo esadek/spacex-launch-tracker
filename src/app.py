@@ -1,25 +1,8 @@
 from flask import Flask, render_template
-from requests import get
 from requests_cache import install_cache
 
-data = {
-    'ids': {
-        'rockets': {
-            '5e9d0d95eda69955f709d1eb': 'Falcon 1',
-            '5e9d0d95eda69973a809d1ec': 'Falcon 9',
-            '5e9d0d95eda69974db09d1ed': 'Falcon Heavy',
-            '5e9d0d96eda699382d09d1ee': 'Starship'
-        },
-        'launchpads': {
-            '5e9e4501f5090910d4566f83': 'VAFB SLC 3W',
-            '5e9e4501f509094ba4566f84': 'CCSFS SLC 40',
-            '5e9e4502f5090927f8566f85': 'STLS',
-            '5e9e4502f5090995de566f86': 'Kwajalein Atoll',
-            '5e9e4502f509092b78566f87': 'VAFB SLC 4E',
-            '5e9e4502f509094188566f88': 'KSC LC 39A'
-        }
-    }
-}
+from data import (get_next_launch, get_latest_launch, get_upcoming_launches,
+                  get_past_launches)
 
 CACHE_DURATION_SECONDS = 3600
 install_cache(expire_after=CACHE_DURATION_SECONDS)
@@ -29,25 +12,23 @@ app = Flask(__name__)
 
 @app.route('/')
 def home() -> str:
-    next_launch_url = 'https://api.spacexdata.com/v4/launches/next'
-    latest_launch_url = 'https://api.spacexdata.com/v4/launches/latest'
-    data['next launch'] = get(next_launch_url).json()
-    data['latest launch'] = get(latest_launch_url).json()
-    return render_template('index.html', data=data)
+    context = {
+        'next_launch': get_next_launch(),
+        'latest_launch': get_latest_launch()
+    }
+    return render_template('index.html', context=context)
 
 
 @app.route('/upcoming')
 def upcoming() -> str:
-    upcoming_launches_url = 'https://api.spacexdata.com/v4/launches/upcoming'
-    data['upcoming launches'] = get(upcoming_launches_url).json()
-    return render_template('upcoming.html', data=data)
+    context = {'upcoming_launches': get_upcoming_launches()}
+    return render_template('upcoming.html', context=context)
 
 
 @app.route('/past')
 def past() -> str:
-    past_launches_url = 'https://api.spacexdata.com/v4/launches/past'
-    data['past launches'] = get(past_launches_url).json()[::-1]
-    return render_template('past.html', data=data)
+    context = {'past_launches': get_past_launches()[::-1]}
+    return render_template('past.html', context=context)
 
 
 @app.route('/about')
