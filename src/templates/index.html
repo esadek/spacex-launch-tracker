@@ -7,22 +7,22 @@
     <div class="row g-0">
       <div class="col-sm">
         <div class="card-body">
-          <h5 class="card-title">{{ data['next launch'].name }}</h5>
+          <h5 class="card-title">{{ context.next_launch.name }}</h5>
           <p class="card-text mb-0">
-            <span class="text-muted">Flight Number:</span> {{ data['next launch'].flight_number }}
+            <span class="text-muted">Flight Number:</span> {{ context.next_launch.flight_number }}
           </p>
           <p class="card-text mb-0">
-            <span class="text-muted">Date:</span> {{ data['next launch'].date_utc[:10] }}
+            <span class="text-muted">Date:</span> {{ context.next_launch.date_utc[:10] }}
           </p>
           <p class="card-text mb-0">
-            <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][data['next launch'].rocket] }}
+            <span class="text-muted">Rocket:</span> {{ context.next_launch.rocket }}
           </p>
           <p class="card-text">
-            <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][data['next launch'].launchpad] }}
+            <span class="text-muted">Launchpad:</span> {{ context.next_launch.launchpad }}
           </p>
         </div>
       </div>
-      <div id="countdown" class="col-sm align-self-center h2 p-3" data-date="{{ data['next launch'].date_unix }}"></div>
+      <div id="countdown" class="col-sm align-self-center h2 p-3" data-date="{{ context.next_launch.date_unix }}"></div>
     </div>
   </div>
 
@@ -30,42 +30,42 @@
   <div class="card bg-light my-4">
     <div class="card-header text-center">Latest Launch</div>
     <div class="card-body">
-      <h5 class="card-title">{{ data['latest launch'].name }}</h5>
+      <h5 class="card-title">{{ context.latest_launch.name }}</h5>
       <p class="card-text mb-0">
         <span class="text-muted">Status: </span>
-        {% if data['latest launch'].success %}
+        {% if context.latest_launch.success %}
           <span class="badge bg-success">Success</span>
         {% else %}
           <span class="badge bg-danger">Failure</span>
         {% endif %}
       </p>
       <p class="card-text mb-0">
-        <span class="text-muted">Flight Number:</span> {{ data['latest launch'].flight_number }}
+        <span class="text-muted">Flight Number:</span> {{ context.latest_launch.flight_number }}
       </p>
       <p class="card-text mb-0">
-        <span class="text-muted">Date:</span> {{ data['latest launch'].date_utc[:10] }}
+        <span class="text-muted">Date:</span> {{ context.latest_launch.date_utc[:10] }}
       </p>
       <p class="card-text mb-0">
-        <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][data['latest launch'].rocket] }}
+        <span class="text-muted">Rocket:</span> {{ context.latest_launch.rocket }}
       </p>
       <p class="card-text">
-        <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][data['latest launch'].launchpad] }}
+        <span class="text-muted">Launchpad:</span> {{ context.latest_launch.launchpad }}
       </p>
-      {% if data['latest launch'].details %}
-        <p class="card-text">{{ data['latest launch'].details }}</p>
+      {% if context.latest_launch.details %}
+        <p class="card-text">{{ context.latest_launch.details }}</p>
       {% endif %}
       <div class="btn-group">
-        {% if data['latest launch'].links.webcast %}
-          <a href="{{ data['latest launch'].links.webcast }}" class="btn btn-sm btn-outline-dark">YouTube</a>
+        {% if context.latest_launch.links.webcast %}
+          <a href="{{ context.latest_launch.links.webcast }}" class="btn btn-sm btn-outline-dark">YouTube</a>
         {% endif %}
-        {% if data['latest launch'].links.article %}
-          <a href="{{ data['latest launch'].links.article }}" class="btn btn-sm btn-outline-dark">Article</a>
+        {% if context.latest_launch.links.article %}
+          <a href="{{ context.latest_launch.links.article }}" class="btn btn-sm btn-outline-dark">Article</a>
         {% endif %}
-        {% if data['latest launch'].links.wikipedia %}
-          <a href="{{ data['latest launch'].links.wikipedia }}" class="btn btn-sm btn-outline-dark">Wikipedia</a>
+        {% if context.latest_launch.links.wikipedia %}
+          <a href="{{ context.latest_launch.links.wikipedia }}" class="btn btn-sm btn-outline-dark">Wikipedia</a>
         {% endif %}
-        {% if data['latest launch'].links.presskit %}
-          <a href="{{ data['latest launch'].links.presskit }}" class="btn btn-sm btn-outline-dark">Press Kit</a>
+        {% if context.latest_launch.links.presskit %}
+          <a href="{{ context.latest_launch.links.presskit }}" class="btn btn-sm btn-outline-dark">Press Kit</a>
         {% endif %}
       </div>
     </div>

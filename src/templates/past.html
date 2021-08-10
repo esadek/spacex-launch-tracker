@@ -5,7 +5,7 @@
   <h1 class="text-center text-white mb-4">Past Launches</h1>
 
   <!-- Cards -->
-  {% for launch in data['past launches'] %}
+  {% for launch in context.past_launches %}
     <div class="card bg-light mb-3">
       <div class="card-body">
         <h5 class="card-title">{{ launch.name }}</h5>
@@ -24,10 +24,10 @@
           <span class="text-muted">Date:</span> {{ launch.date_utc[:10] }}
         </p>
         <p class="card-text mb-0">
-          <span class="text-muted">Rocket:</span> {{ data['ids']['rockets'][launch.rocket] }}
+          <span class="text-muted">Rocket:</span> {{ launch.rocket }}
         </p>
         <p class="card-text">
-          <span class="text-muted">Launchpad:</span> {{ data['ids']['launchpads'][launch.launchpad] }}
+          <span class="text-muted">Launchpad:</span> {{ launch.launchpad }}
         </p>
         {% if launch.details %}
           <p class="card-text">{{ launch.details }}</p>
